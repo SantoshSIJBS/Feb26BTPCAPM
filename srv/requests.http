@@ -2,6 +2,7 @@
 
 POST http://localhost:8080/odata/v4/OrdersService/Orders
 Content-Type: application/json
+Authorization: Basic klaus:pass_klaus
 
 {
     "items" : [
@@ -25,3 +26,41 @@ Accept: application/json
 
 ###
 GET http://localhost:8080/odata/v2/OrdersService
+
+
+###
+GET http://localhost:8080/odata/v4/AdminService/
+Accept: application/json
+Authorization: Basic ram:pass_ram
+
+
+
+### Step-1 : Create Order
+POST http://localhost:8080/odata/v4/OrdersService/Orders
+Content-Type: application/json
+Authorization: Basic klaus:pass_klaus
+
+{
+    "items" : [
+        {
+            "book_ID" : "fd0c5fda-8811-4e20-bcff-3a776abc290a",
+            "amount" : 10
+        }
+    ]
+}
+
+###Step-2: Display Order
+GET http://localhost:8080/odata/v4/OrdersService/Orders?$expand=items
+Accept: application/json
+Authorization: Basic klaus:pass_klaus
+
+###Step-3: Display Order who didn't created the order
+GET http://localhost:8080/odata/v4/OrdersService/Orders?$expand=items
+Accept: application/json
+Authorization: Basic mia:pass_mia
+
+
+###Step-4: Display Order for Administrator
+GET http://localhost:8080/odata/v4/OrdersService/Orders?$expand=items
+Accept: application/json
+Authorization: Basic ram:pass_ram
